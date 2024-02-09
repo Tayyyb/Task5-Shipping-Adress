@@ -21,23 +21,47 @@ $(document).ready(function () {
   });
 
   // Save address on click of Save Address button
-  $('#saveAddressBtn').click(function () {
-      var name = $('#name').val();
-      var address = $('#address').val();
-      var city = $('#city').val();
-      var state = $('#state').val();
-      var postalCode = $('#postalCode').val();
-      var newAddress = { name: name, address: address, city: city, state: state, postalCode: postalCode };
+$('#saveAddressBtn').click(function () {
+    var name = $('#name').val();
+    var address = $('#address').val();
+    var city = $('#city').val();
+    var state = $('#state').val();
+    var postalCode = $('#postalCode').val();
+    
+    // Check if any of the fields are empty
+    if (name.trim() === '' || address.trim() === '' || city.trim() === '' || state.trim() === '' || postalCode.trim() === '') {
+        alert('Please fill in all fields.');
+        return; // Stop execution if any field is empty
+    }
+    
+    var newAddress = { name: name, address: address, city: city, state: state, postalCode: postalCode };
 
-      var addresses = JSON.parse(localStorage.getItem('addresses')) || [];
-      addresses.push(newAddress);
-      localStorage.setItem('addresses', JSON.stringify(addresses));
+    var addresses = JSON.parse(localStorage.getItem('addresses')) || [];
+    
+    // Check for duplicate entries
+    var isDuplicate = addresses.some(function(existingAddress) {
+        return existingAddress.name === newAddress.name 
+            && existingAddress.address === newAddress.address 
+            && existingAddress.city === newAddress.city 
+            && existingAddress.state === newAddress.state 
+            && existingAddress.postalCode === newAddress.postalCode;
+    });
+    
+    if (isDuplicate) {
+        alert('This address already exists.');
+        return; // Stop execution if address is a duplicate
+    }
+    
+    // Save the new address
+    addresses.push(newAddress);
+    localStorage.setItem('addresses', JSON.stringify(addresses));
 
-      $('#shippingAddressForm').hide();
-      $('#shippingAddressForm input').val('');
-      $('#message').text('Address has been saved').show().delay(5000).fadeOut();
-      populateSavedAddressesDropdown(); // Update dropdown after saving address
-  });
+    $('#shippingAddressForm').hide();
+    $('#shippingAddressForm input').val('');
+    $('#message').text('Address has been saved').show().delay(5000).fadeOut();
+    populateSavedAddressesDropdown(); // Update dropdown after saving address
+});
+
 
  // Event handler for when an address is selected from the dropdown
 $('#savedAddressesDropdown').change(function() {
