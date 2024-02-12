@@ -7,55 +7,66 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
  <!-- Include Bootstrap CSS -->
  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+ <style>
+    .error-message {
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+  </style>
 </head>
 <body>
     
-  <div class="container mt-5">
-    <div class="row">
-        <div class="col">
-            <button id="addNewAddressBtn" class="btn btn-success">Add New Address</button>
-            <button id="updateAddressBtn" class="btn btn-primary ml-2">Update Address</button>
-            <button id="deleteAddressBtn" class="btn btn-danger ml-2">Delete Address</button>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col">
-            <form id="shippingAddressForm" style="display: none;">
-                <!-- Input fields for shipping address -->
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter name">
-                </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Enter address">
-                </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="Enter city">
-                </div>
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" class="form-control" id="state" placeholder="Enter state">
-                </div>
-                <div class="form-group">
-                    <label for="postalCode">Postal Code</label>
-                    <input type="text" class="form-control" id="postalCode" placeholder="Enter postal code">
-                </div>
-                <button type="button" id="saveAddressBtn" class="btn btn-primary">Save Address</button>
-            </form>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col">
-            <div class="form-group">
-                <label for="savedAddressesDropdown">Saved Addresses</label>
-                <select class="form-control" id="savedAddressesDropdown"></select>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <button id="addNewAddressBtn" class="btn btn-success">Add New Address</button>
+                <button id="updateAddressBtn" class="btn btn-primary ml-2">Update Address</button>
+                <button id="deleteAddressBtn" class="btn btn-danger ml-2">Delete Address</button>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col">
+                <form id="shippingAddressForm" style="display: none;">
+                    <!-- Input fields for shipping address -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter name">
+                        <div class="error-message" id="nameError" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="Enter address">
+                        <div class="error-message" id="addressError" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="Enter city">
+                        <div class="error-message" id="cityError" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" placeholder="Enter state">
+                        <div class="error-message" id="stateError" style="color: red; display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" class="form-control" id="postalCode" placeholder="Enter postal code">
+                        <div class="error-message" id="postalCodeError" style="color: red; display: none;"></div>
+                    </div>
+                    <button type="button" id="saveAddressBtn" class="btn btn-primary">Save Address</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="form-group">
+                    <label for="savedAddressesDropdown">Saved Addresses</label>
+                    <select class="form-control" id="savedAddressesDropdown"></select>
+                </div>
+            </div>
+        </div>
+        <div id="message" class="mt-3" style="display: none;"></div>
     </div>
-    <div id="message" class="mt-3" style="display: none;"></div>
-</div>
 
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
